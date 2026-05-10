@@ -35,6 +35,7 @@ public class SecurityConfig {
                 .requestMatchers("/swagger-ui.html").permitAll()
                 .requestMatchers("/swagger/resources/**").permitAll()
                 .requestMatchers("/webjars/**").permitAll()
+                // los archivos los pongo accesibles sin acutenticacion para que sea mas accesible desde el navegador, pero lo normal seria restringirlos
                 .requestMatchers("/api/devices/files/**").permitAll()
                 .requestMatchers(HttpMethod.GET,"/api/devices/**").hasAnyAuthority("ROLE_ADMIN","ROLE_USER")
                 .requestMatchers(HttpMethod.PATCH,"/api/devices/**").hasAnyAuthority("ROLE_ADMIN", "ROLE_USER")

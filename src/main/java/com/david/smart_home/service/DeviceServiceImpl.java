@@ -80,6 +80,8 @@ public class DeviceServiceImpl implements DeviceService{
 
     public void borrar(Long id) {
         Device existente = deviceRepository.findById(id).orElseThrow(() -> new DeviceNotFoundException("No existen un dispositivo con id "+id));
+        // Borramos la foto del servidor
+        fileService.delete(existente.getFoto());
         deviceRepository.delete(existente);
     }
 }
