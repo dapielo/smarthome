@@ -7,6 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -37,8 +38,12 @@ public class DeviceController {
     @PreAuthorize("hasRole('ADMIN')")
     // La clase MediaType, tiene los diferrentes mediatype, y sus correspondientes value, los value son la cadena de texto, no objetos MediaType
     // y aqui quiero el texto, equivale a "multipart/form-data", pero escrito a traves de esta clase te evitas errores de sintaxis
+
+    // NOTA: He cambiado el RequestPart de data a @ModelAttribute, porque de esta forma el frontend puede caputaar los campos en un formData
+    // y enviar ese formData directamente sin que el servidor se queje, usando requestpart hay que hacer malabares en el cliente para poder enviar
+
     @PostMapping(consumes = MediaType.MULTIPART_FORM_DATA_VALUE) 
-    public ResponseEntity<DeviceDTO> crear(@Valid @RequestPart("data") DeviceDTO dto, @RequestPart(name = "image", required = false) MultipartFile image) {
+    public ResponseEntity<DeviceDTO> crear(@Valid @ModelAttribute DeviceDTO dto, @RequestPart(name = "image", required = false) MultipartFile image) {
         // Si viene sin imagen el FileService esta diseñado para almacenar una cadena vacía
         DeviceDTO nuevo = deviceService.guardar(dto,image);
         return new ResponseEntity<>(nuevo,HttpStatus.CREATED);

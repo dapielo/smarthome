@@ -17,7 +17,6 @@ import com.david.smart_home.security.JwtTokenProvider;
 import com.david.smart_home.service.UserService;
 import lombok.RequiredArgsConstructor;
 
-
 @RestController
 @RequiredArgsConstructor
 public class AuthController {
