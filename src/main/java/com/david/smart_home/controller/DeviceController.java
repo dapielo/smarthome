@@ -51,7 +51,7 @@ public class DeviceController {
 
     @PreAuthorize("hasAnyRole('ADMIN','USER')")
     @PutMapping("/{id}")
-    public ResponseEntity<DeviceDTO> actualizar(@PathVariable Long id, @Valid @RequestPart("data") DeviceDTO dto, @RequestPart("image") MultipartFile image) {
+    public ResponseEntity<DeviceDTO> actualizar(@PathVariable Long id, @Valid @ModelAttribute DeviceDTO dto, @RequestPart("image") MultipartFile image) {
         DeviceDTO actualizado = deviceService.actualizar(id, dto, image);
         return new ResponseEntity<>(actualizado,HttpStatus.CREATED);
     }

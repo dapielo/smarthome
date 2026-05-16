@@ -58,7 +58,6 @@ public class DeviceServiceImpl implements DeviceService{
         existente.setLastUpdated(LocalDateTime.now().truncatedTo(ChronoUnit.SECONDS));
         existente.setModel(dto.model());
         existente.setName(dto.name());
-        existente.setStatus(Status.valueOf(dto.status().toUpperCase()));
         existente.setStatusDetail(Util.generarStatus());
         existente.setType(dto.type());
         existente.setLocation(dto.location());
